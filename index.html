@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domains Available | domains.yo.vc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sky-top: #1a0a2e;
+      --sky-mid: #4a2040;
+      --sky-low: #c2604a;
+      --horizon: #e8945a;
+      --sand: #EDC9AF;
+      --sand-dark: #C2956B;
+      --ground: #8B6914;
+      --ground-dark: #5C4033;
+      --parchment: #F5E6D3;
+      --parchment-dark: #E8D5B7;
+      --brown-dark: #2C1810;
+      --brown-mid: #5D4037;
+      --brown-border: #3E2723;
+      --rust: #C15F3C;
+      --rust-light: #E07850;
+      --gold: #DAA520;
+      --gold-light: #FFD700;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      color: var(--brown-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: linear-gradient(
+        to bottom,
+        var(--sky-top) 0%,
+        var(--sky-mid) 15%,
+        var(--sky-low) 35%,
+        var(--horizon) 50%,
+        var(--sand) 65%,
+        var(--sand-dark) 100%
+      );
+      position: relative;
+    }
+
+    /* Stars in the sky */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+
+    /* Sun */
+    .sun {
+      position: fixed;
+      top: 8%;
+      right: 10%;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, var(--gold-light) 0%, var(--gold) 40%, rgba(218,165,32,0) 70%);
+      border-radius: 50%;
+      z-index: 1;
+      pointer-events: none;
+      box-shadow: 0 0 60px 20px rgba(255,215,0,0.3), 0 0 120px 60px rgba(255,165,0,0.15);
+    }
+
+    /* Ground strip */
+    .ground {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(
+        to bottom,
+        var(--sand-dark) 0%,
+        var(--ground) 30%,
+        var(--ground-dark) 100%
+      );
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .ground::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        var(--sand-dark) 10%,
+        var(--ground) 50%,
+        var(--sand-dark) 90%,
+        transparent 100%
+      );
+    }
+
+    /* Dust particles */
+    .dust {
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: rgba(237, 201, 175, 0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 3;
+      animation: dustFloat linear infinite;
+    }
+
+    @keyframes dustFloat {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translate(var(--dust-dx), var(--dust-dy)) scale(0.3);
+        opacity: 0;
+      }
+    }
+
+    /* Main content */
+    .content {
+      position: relative;
+      z-index: 10;
+      padding: 60px 20px 160px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .header h1 {
+      font-family: 'Rye', cursive;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      color: var(--parchment);
+      text-shadow:
+        2px 2px 0 var(--brown-dark),
+        4px 4px 0 rgba(0,0,0,0.3),
+        0 0 20px rgba(218,165,32,0.3);
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .header p {
+      font-family: 'Lora', serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--parchment-dark);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .header a {
+      color: var(--gold-light);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--gold);
+      transition: color 0.3s, border-color 0.3s;
+      font-weight: 600;
+    }
+
+    .header a:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    /* Domain grid */
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+      padding: 0 10px;
+    }
+
+    /* Domain card — wanted poster style */
+    .domain-card {
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 28px,
+          rgba(139,109,20,0.04) 28px,
+          rgba(139,109,20,0.04) 30px
+        ),
+        linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+      border: 3px solid var(--brown-border);
+      border-radius: 4px;
+      padding: 24px 16px;
+      text-align: center;
+      position: relative;
+      cursor: default;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow:
+        2px 3px 8px rgba(0,0,0,0.3),
+        inset 0 0 30px rgba(139,109,20,0.08);
+    }
+
+    .domain-card::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      bottom: 6px;
+      border: 1px solid var(--brown-mid);
+      border-radius: 2px;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    .domain-card:hover {
+      transform: translateY(-6px) rotate(-0.5deg);
+      box-shadow:
+        4px 8px 20px rgba(0,0,0,0.4),
+        inset 0 0 30px rgba(139,109,20,0.08),
+        0 0 15px rgba(218,165,32,0.2);
+    }
+
+    .domain-card .domain-name {
+      font-family: 'Rye', cursive;
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
+      color: var(--brown-dark);
+      word-break: break-all;
+      line-height: 1.4;
+    }
+
+    /* Nail holes on cards */
+    .domain-card::after {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, var(--brown-border) 30%, var(--brown-mid) 60%, transparent 70%);
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    /* Cacti */
+    .cactus {
+      position: fixed;
+      bottom: 80px;
+      z-index: 5;
+      pointer-events: none;
+      animation: cactusSway 6s ease-in-out infinite;
+    }
+
+    .cactus-1 { left: 5%; animation-delay: 0s; }
+    .cactus-2 { right: 8%; animation-delay: 2s; }
+    .cactus-3 { left: 45%; animation-delay: 4s; }
+    .cactus-4 { right: 30%; animation-delay: 1s; }
+
+    @keyframes cactusSway {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(0.5deg); }
+      75% { transform: rotate(-0.5deg); }
+    }
+
+    /* Tumbleweed */
+    .tumbleweed {
+      position: fixed;
+      z-index: 6;
+      pointer-events: none;
+      animation: tumbleRoll linear forwards;
+    }
+
+    @keyframes tumbleRoll {
+      0% {
+        transform: translateX(100vw) rotate(0deg);
+        opacity: 0;
+      }
+      5% {
+        opacity: 1;
+      }
+      95% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-150px) rotate(-1440deg);
+        opacity: 0;
+      }
+    }
+
+    /* Claude mascot */
+    .claude-cowboy {
+      position: fixed;
+      z-index: 6;
+      pointer-events: none;
+      animation: claudeFloat linear forwards;
+    }
+
+    @keyframes claudeFloat {
+      0% {
+        transform: translateX(100vw) translateY(0);
+        opacity: 0;
+      }
+      5% {
+        opacity: 1;
+      }
+      25% {
+        transform: translateX(75vw) translateY(-15px);
+      }
+      50% {
+        transform: translateX(50vw) translateY(5px);
+      }
+      75% {
+        transform: translateX(25vw) translateY(-10px);
+      }
+      95% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-150px) translateY(0);
+        opacity: 0;
+      }
+    }
+
+    /* Shooting star */
+    .shooting-star {
+      position: fixed;
+      z-index: 1;
+      pointer-events: none;
+      width: 3px;
+      height: 3px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px 2px rgba(255,255,255,0.6);
+      animation: shootingStar 1.5s linear forwards;
+    }
+
+    @keyframes shootingStar {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-300px, 200px);
+      }
+    }
+
+    /* Footer brand */
+    .footer {
+      text-align: center;
+      padding: 30px 20px 40px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer p {
+      font-family: 'Lora', serif;
+      font-size: 0.85rem;
+      color: rgba(245,230,211,0.5);
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .content {
+        padding: 40px 12px 160px;
+      }
+      .domain-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 16px;
+      }
+      .domain-card {
+        padding: 18px 10px;
+      }
+      .sun {
+        width: 50px;
+        height: 50px;
+        top: 5%;
+        right: 5%;
+      }
+      .cactus-3 {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .domain-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+      }
+      .cactus-4 {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Stars -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Sun -->
+  <div class="sun"></div>
+
+  <!-- Cacti -->
+  <svg class="cactus cactus-1" width="40" height="90" viewBox="0 0 40 90">
+    <g fill="#2D5A27" stroke="#1B3D18" stroke-width="1">
+      <rect x="15" y="20" width="10" height="70" rx="5"/>
+      <rect x="0" y="30" width="10" height="30" rx="5"/>
+      <rect x="0" y="30" width="20" height="10" rx="4"/>
+      <rect x="30" y="40" width="10" height="25" rx="5"/>
+      <rect x="20" y="40" width="20" height="10" rx="4"/>
+    </g>
+    <g stroke="#3A7A33" stroke-width="0.5" fill="none" opacity="0.5">
+      <line x1="20" y1="25" x2="20" y2="85"/>
+      <line x1="5" y1="35" x2="5" y2="55"/>
+      <line x1="35" y1="45" x2="35" y2="60"/>
+    </g>
+  </svg>
+
+  <svg class="cactus cactus-2" width="50" height="110" viewBox="0 0 50 110">
+    <g fill="#2D5A27" stroke="#1B3D18" stroke-width="1">
+      <rect x="18" y="10" width="14" height="100" rx="7"/>
+      <rect x="0" y="25" width="12" height="35" rx="6"/>
+      <rect x="0" y="25" width="25" height="12" rx="5"/>
+      <rect x="38" y="35" width="12" height="30" rx="6"/>
+      <rect x="25" y="35" width="25" height="12" rx="5"/>
+      <rect x="0" y="55" width="12" height="20" rx="6" transform="translate(40, 0)"/>
+      <rect x="25" y="60" width="22" height="10" rx="4"/>
+    </g>
+    <g stroke="#3A7A33" stroke-width="0.5" fill="none" opacity="0.5">
+      <line x1="25" y1="15" x2="25" y2="105"/>
+      <line x1="6" y1="30" x2="6" y2="55"/>
+      <line x1="44" y1="40" x2="44" y2="60"/>
+    </g>
+  </svg>
+
+  <svg class="cactus cactus-3" width="30" height="60" viewBox="0 0 30 60">
+    <g fill="#3A7A33" stroke="#1B3D18" stroke-width="0.8">
+      <ellipse cx="15" cy="35" rx="12" ry="18"/>
+      <ellipse cx="15" cy="20" rx="9" ry="14"/>
+      <ellipse cx="15" cy="10" rx="6" ry="10"/>
+    </g>
+    <g stroke="#2D5A27" stroke-width="0.5" fill="none" opacity="0.4">
+      <line x1="15" y1="5" x2="15" y2="52"/>
+    </g>
+  </svg>
+
+  <svg class="cactus cactus-4" width="25" height="55" viewBox="0 0 25 55">
+    <g fill="#2D5A27" stroke="#1B3D18" stroke-width="0.8">
+      <rect x="8" y="10" width="9" height="45" rx="4.5"/>
+      <rect x="0" y="22" width="8" height="18" rx="4"/>
+      <rect x="0" y="22" width="14" height="8" rx="3"/>
+    </g>
+    <g stroke="#3A7A33" stroke-width="0.4" fill="none" opacity="0.5">
+      <line x1="12.5" y1="14" x2="12.5" y2="52"/>
+      <line x1="4" y1="26" x2="4" y2="36"/>
+    </g>
+  </svg>
+
+  <!-- Ground -->
+  <div class="ground"></div>
+
+  <!-- Main Content -->
+  <main class="content">
+    <header class="header">
+      <h1>Domains Available:</h1>
+      <p>Please contact me <a href="https://www.yo.vc/contact">here</a> if you're interested</p>
+    </header>
+
+    <div class="domain-grid">
+      <div class="domain-card"><span class="domain-name">4MF.com</span></div>
+      <div class="domain-card"><span class="domain-name">AgencyBuyers.com</span></div>
+      <div class="domain-card"><span class="domain-name">AlumniNetworks.com</span></div>
+      <div class="domain-card"><span class="domain-name">AmazingRestaurant.com</span></div>
+      <div class="domain-card"><span class="domain-name">aoxc.com</span></div>
+      <div class="domain-card"><span class="domain-name">BugFarms.com</span></div>
+      <div class="domain-card"><span class="domain-name">CasinoAddictions.com</span></div>
+      <div class="domain-card"><span class="domain-name">CementMolds.com</span></div>
+      <div class="domain-card"><span class="domain-name">DisabledBenefits.com</span></div>
+      <div class="domain-card"><span class="domain-name">DiveNY.com</span></div>
+      <div class="domain-card"><span class="domain-name">FakeCrap.com</span></div>
+      <div class="domain-card"><span class="domain-name">Folksie.com</span></div>
+      <div class="domain-card"><span class="domain-name">GGDE.com</span></div>
+      <div class="domain-card"><span class="domain-name">GrabGrab.com</span></div>
+      <div class="domain-card"><span class="domain-name">Grimlet.com</span></div>
+      <div class="domain-card"><span class="domain-name">HistoryClass.com</span></div>
+      <div class="domain-card"><span class="domain-name">IdealDiets.com</span></div>
+      <div class="domain-card"><span class="domain-name">ILovePrivacy.com</span></div>
+      <div class="domain-card"><span class="domain-name">JAFFU.com</span></div>
+      <div class="domain-card"><span class="domain-name">JobTransfers.com</span></div>
+      <div class="domain-card"><span class="domain-name">Microbody.com</span></div>
+      <div class="domain-card"><span class="domain-name">NerdBrat.com</span></div>
+      <div class="domain-card"><span class="domain-name">OverYou.com</span></div>
+      <div class="domain-card"><span class="domain-name">OwnProperty.com</span></div>
+      <div class="domain-card"><span class="domain-name">PorkSoup.com</span></div>
+      <div class="domain-card"><span class="domain-name">RubyRails.com</span></div>
+      <div class="domain-card"><span class="domain-name">Saltysnacks.com</span></div>
+      <div class="domain-card"><span class="domain-name">SellingPapers.com</span></div>
+      <div class="domain-card"><span class="domain-name">Shazaa.com</span></div>
+      <div class="domain-card"><span class="domain-name">Slurping.com</span></div>
+      <div class="domain-card"><span class="domain-name">SmallPill.com</span></div>
+      <div class="domain-card"><span class="domain-name">StrongLads.com</span></div>
+      <div class="domain-card"><span class="domain-name">TryCryotherapy.com</span></div>
+      <div class="domain-card"><span class="domain-name">Yizza.com</span></div>
+    </div>
+
+    <footer class="footer">
+      <p>domains.yo.vc</p>
+    </footer>
+  </main>
+
+  <!-- SVG Templates (hidden, cloned by JS) -->
+  <svg id="tumbleweed-template" style="display:none" width="60" height="60" viewBox="0 0 60 60">
+    <g fill="none" stroke="#8B6914" stroke-width="1.5" opacity="0.85">
+      <circle cx="30" cy="30" r="22"/>
+      <ellipse cx="30" cy="30" rx="26" ry="18" transform="rotate(30 30 30)"/>
+      <ellipse cx="30" cy="30" rx="26" ry="18" transform="rotate(-30 30 30)"/>
+      <ellipse cx="30" cy="30" rx="26" ry="18" transform="rotate(90 30 30)"/>
+      <path d="M10,25 Q20,15 30,25 Q40,35 50,25" />
+      <path d="M15,40 Q25,30 35,40 Q45,50 55,40" />
+      <path d="M8,30 Q18,20 28,30 Q38,40 48,30" />
+      <circle cx="30" cy="30" r="14"/>
+      <circle cx="30" cy="30" r="8"/>
+      <path d="M20,15 Q30,5 40,15" />
+      <path d="M20,45 Q30,55 40,45" />
+    </g>
+  </svg>
+
+  <svg id="claude-template" style="display:none" width="80" height="90" viewBox="0 0 80 90">
+    <!-- Cowboy hat -->
+    <g>
+      <ellipse cx="40" cy="28" rx="32" ry="6" fill="#5C4033" stroke="#3E2723" stroke-width="1"/>
+      <path d="M18,28 Q20,8 40,5 Q60,8 62,28" fill="#8B6914" stroke="#5C4033" stroke-width="1"/>
+      <path d="M22,28 Q24,14 40,11 Q56,14 58,28" fill="#A0782C" stroke="none"/>
+      <ellipse cx="40" cy="28" rx="26" ry="4" fill="#5C4033" opacity="0.3"/>
+      <!-- Hat band -->
+      <rect x="24" y="20" width="32" height="3" rx="1" fill="#C15F3C"/>
+      <circle cx="40" cy="21.5" r="2" fill="#DAA520"/>
+    </g>
+    <!-- Claude starburst icon -->
+    <g transform="translate(40, 58)">
+      <g fill="#C15F3C">
+        <!-- 6-pointed starburst -->
+        <ellipse cx="0" cy="-14" rx="4" ry="14"/>
+        <ellipse cx="0" cy="-14" rx="4" ry="14" transform="rotate(60)"/>
+        <ellipse cx="0" cy="-14" rx="4" ry="14" transform="rotate(120)"/>
+        <ellipse cx="0" cy="-14" rx="4" ry="14" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-14" rx="4" ry="14" transform="rotate(240)"/>
+        <ellipse cx="0" cy="-14" rx="4" ry="14" transform="rotate(300)"/>
+        <circle cx="0" cy="0" r="6"/>
+      </g>
+      <!-- Friendly eyes -->
+      <circle cx="-4" cy="-2" r="1.5" fill="#fff"/>
+      <circle cx="4" cy="-2" r="1.5" fill="#fff"/>
+      <circle cx="-4" cy="-1.5" r="0.7" fill="#2C1810"/>
+      <circle cx="4" cy="-1.5" r="0.7" fill="#2C1810"/>
+    </g>
+  </svg>
+
+  <script>
+    // --- Stars ---
+    (function createStars() {
+      const container = document.getElementById('stars');
+      for (let i = 0; i < 80; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.width = (Math.random() * 2 + 1) + 'px';
+        star.style.height = star.style.width;
+        star.style.animationDelay = (Math.random() * 3) + 's';
+        star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        container.appendChild(star);
+      }
+    })();
+
+    // --- Dust particles ---
+    (function createDust() {
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          spawnDust();
+        }, Math.random() * 5000);
+      }
+      setInterval(spawnDust, 2000);
+
+      function spawnDust() {
+        const dust = document.createElement('div');
+        dust.className = 'dust';
+        dust.style.left = Math.random() * 100 + '%';
+        dust.style.bottom = (Math.random() * 200 + 80) + 'px';
+        dust.style.setProperty('--dust-dx', (Math.random() * 100 - 50) + 'px');
+        dust.style.setProperty('--dust-dy', -(Math.random() * 60 + 20) + 'px');
+        const duration = Math.random() * 4 + 3;
+        dust.style.animationDuration = duration + 's';
+        document.body.appendChild(dust);
+        setTimeout(() => dust.remove(), duration * 1000);
+      }
+    })();
+
+    // --- Tumbleweed spawner ---
+    (function tumbleweedLoop() {
+      function spawnTumbleweed() {
+        const template = document.getElementById('tumbleweed-template');
+        const tw = template.cloneNode(true);
+        tw.removeAttribute('id');
+        tw.style.display = 'block';
+        tw.classList.add('tumbleweed');
+
+        const size = Math.random() * 30 + 40;
+        tw.style.width = size + 'px';
+        tw.style.height = size + 'px';
+        tw.style.bottom = (Math.random() * 40 + 90) + 'px';
+
+        const duration = Math.random() * 6 + 8;
+        tw.style.animationDuration = duration + 's';
+
+        document.body.appendChild(tw);
+        setTimeout(() => tw.remove(), duration * 1000 + 500);
+      }
+
+      // First tumbleweed after short delay
+      setTimeout(spawnTumbleweed, 2000);
+
+      // Then every 8-15 seconds
+      function scheduleNext() {
+        const delay = Math.random() * 7000 + 8000;
+        setTimeout(() => {
+          spawnTumbleweed();
+          scheduleNext();
+        }, delay);
+      }
+      scheduleNext();
+    })();
+
+    // --- Claude cowboy spawner ---
+    (function claudeLoop() {
+      function spawnClaude() {
+        const template = document.getElementById('claude-template');
+        const cl = template.cloneNode(true);
+        cl.removeAttribute('id');
+        cl.style.display = 'block';
+        cl.classList.add('claude-cowboy');
+
+        const size = Math.random() * 20 + 60;
+        cl.style.width = size + 'px';
+        cl.style.height = (size * 1.125) + 'px';
+        cl.style.top = (Math.random() * 40 + 20) + '%';
+
+        const duration = Math.random() * 8 + 12;
+        cl.style.animationDuration = duration + 's';
+
+        document.body.appendChild(cl);
+        setTimeout(() => cl.remove(), duration * 1000 + 500);
+      }
+
+      // First Claude after a bit
+      setTimeout(spawnClaude, 6000);
+
+      // Then every 20-35 seconds
+      function scheduleNext() {
+        const delay = Math.random() * 15000 + 20000;
+        setTimeout(() => {
+          spawnClaude();
+          scheduleNext();
+        }, delay);
+      }
+      scheduleNext();
+    })();
+
+    // --- Shooting stars ---
+    (function shootingStarLoop() {
+      function spawnShootingStar() {
+        const star = document.createElement('div');
+        star.className = 'shooting-star';
+        star.style.top = (Math.random() * 25) + '%';
+        star.style.left = (Math.random() * 60 + 20) + '%';
+        document.body.appendChild(star);
+        setTimeout(() => star.remove(), 1600);
+      }
+
+      function scheduleNext() {
+        const delay = Math.random() * 12000 + 8000;
+        setTimeout(() => {
+          spawnShootingStar();
+          scheduleNext();
+        }, delay);
+      }
+      scheduleNext();
+    })();
+  </script>
+</body>
+</html>
